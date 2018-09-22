@@ -86,12 +86,22 @@ int main(int argc, char *argv[])
 }
 
 /****** you need to document and code this function *****/
+/*
+o One line per user (separated by spaces)
+            szMake  szModel  dAvgMPG  dAvgPPG  iNumFillups  
+            10s     10s      lf       lf       d
+    - User Contact Information:
+        o One line per user (separated by commas)
+            szUserId  szEmail szFullName  szPhone  szLoginName
+            6s        30s     20s         13s      12s
 
+*/
 void getUsers(void)
 {
 	char szInptBuffer[100];
 	int iscanfCnt;
-	User user
+	User user;
+	fprintf(pFileUsers, "%10s %10s %lf %d\n", "szMake","szModel","dAvgMPG","dAvgPPG", "iNumFillups")
 
 	// Read user data until EOF
 		while (fgets(szInptBuffer, 100, pFileUsers) != NULL)
