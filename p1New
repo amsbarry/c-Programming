@@ -106,80 +106,48 @@ void getUsers(void)
 	User user;
 	
 	pszUserResult = fgets(szInptBuffer, 100, pFileUsers);
-	//fprintf(pFileUsers, "%6s %30s %12s %13s %20s %10s %10s %lf %lf %d\n", "szUserId","szEmailAddr","szLoginName","szPhone","szFullName","szMake","szModel","dAvgMPG","dAvgPPG","iNumFillups");
+	fprintf(pFileUsers, "%6s %30s %12s %13s %20s %10s %10s %lf %lf %d\n", "szUserId","szEmailAddr","szLoginName","szPhone","szFullName","szMake","szModel","dAvgMPG","dAvgPPG","iNumFillups");
 	//fprintf(pFileUsers, "%6s %30s %20s %13s %12s\n", "szUserId","szEmailAddr","szFullName","szPhone","szLoginName");
 
 	// Read user data until reach EOF
 		//pszUserResult = fgets(szInptBuffer, 100, pFileUsers);
 		while (fgets(szInptBuffer, 100, pFileUsers) != NULL)
 		{
-			iScanfCnt = sscanf(szInptBuffer, "%6s %10s %10s %lf %lf\n"
-				,user.szUserId    
+			
+			iScanfCnt = sscanf(szInptBuffer, "%6s %10s %10s %lf %lf %d\n"
 				,user.szMake     
 				,user.szModel    
 				,&user.dAvgMPG        
-				,&user.dAvgPPG);
-				printf("%6s %5s %6s %7s %7s\n","UserID","Make","Model","AvgMPG","AvgPPG");
-				printf("7%s %11s %11s %lf %lf\n"
+				,&user.dAvgPPG
+				,&user.iNumFillups);
+				printf("%6s %5s %6s %7s %7s\n","Make","Model","AvgMPG","AvgPPG","NumFillups" );
+				printf("7%s %11s %11s %lf %lf %d\n"
 				,user.szUserId    
 				,user.szMake     
 				,user.szModel    
 				,user.dAvgMPG        
 				,user.dAvgPPG        
+				,user.iNumFillups
 				);
-				iScanfCnt = sscanf(szInptBuffer, "%20[^\n] %13s %12s %30s\n"
-				,user.szFullName    
-				,user.szPhone
-				,user.szLoginName
-				,user.szEmailAddr    
-				);
-				printf("\t%6s %5s %6s %7s %7s\n","Name","Phone","login","email");
-				printf("%20s %13s %12s %30s\n"    
-				,user.szFullName     
+				iScanfCnt = sscanf(szInptBuffer,"%6s %30s %20[^\n] %13s %12s\n"
+				,user.szUserId    
+				,user.szEmailAddr
+				,user.szFullName
 				,user.szPhone    
-				,user.szLoginName        
-				,user.szEmailAddr        
+				,user.szLoginName 
+				);
+				printf("\t%6s %5s %6s %7s %7s\n","UseID","email","Name","Phone","login");
+				printf("%6s %30s %20s %13s %12s\n"    
+				,user.szUserId     
+				,user.szEmailAddr    
+				,user.szFullName        
+				,user.szPhone        
+				,user.szLoginName 
 				);
 			// Check for bad input. scanf returns the number of valid conversions
 			if (iScanfCnt < 2)
 			exitError(ERR_USER_CONTACT_DATA, szInptBuffer);
-				/*printf("\t\t%6s %11s %10s %5s %9s %5s %6s %7s %7s %10s\n","UserID","EmailAddr","Login","Phone","Name","Make","Model","AvgMPG","AvgPPG","NumFillups");
-				printf("%6s %30s %12s %13s %-20s %10s %10s %lf %lf %d\n", user.szUserId    
-				,user.szEmailAddr
-				,user.szLoginName
-				,user.szPhone    
-				,user.szFullName
-				,user.szMake     
-				,user.szModel    
-				,user.dAvgMPG        
-				,user.dAvgPPG        
-				,user.iNumFillups);*
-				printf("t%6s %5s %6s %7s %7s\n","UserID","Make","Model","Make","AvgMPG","AvgPPG");
-				printf("%6s %30s %12s %13s %-20s %10s %10s %lf %lf %d\n", user.szUserId    
-				,user.szMake     
-				,user.szModel    
-				,user.dAvgMPG        
-				,user.dAvgPPG        
-				);
-				printf("t%6s %5s %6s %7s %7s\n","Name","Phone","login","email");
-				printf("%6s %30s %12s %13s %-20s %10s %10s %lf %lf %d\n", user.szUserId    
-				,user.szFullName     
-				,user.szPhone    
-				,user.szLoginName        
-				,user.szEmailAddr        
-				);
-			iScanfCnt = sscanf(szInptBuffer, "%6s %30s %12s %13s %20[^\n] %10s %10s %lf %lf %d\n"
-				,user.szUserId    
-				,user.szEmailAddr
-				,user.szLoginName
-				,user.szPhone    
-				,user.szFullName
-				,user.szMake     
-				,user.szModel    
-				,&user.dAvgMPG        
-				,&user.dAvgPPG        
-				,&user.iNumFillups);
-*/
+
 			iUserCnt++;
 			//pszUserResult = fgets(szInptBuffer, 100, pFileUsers);
 			pszUserResult = fgets(szInptBuffer, 100, pFileUsers);
