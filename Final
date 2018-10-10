@@ -93,48 +93,51 @@ void getUsers(void)
 	char szInptBuffer[100];	// inputbuffer for the fgets
 	int iScanfCnt;			//holds output from sscanf for successful inputs
 	int iUserCnt = 0;		//holds count and incremented utnlit there is no more line
+	int iVclCnt = 0;
 	char *pszUserResult;	//variable for the user file
 	User user;
 	// Print headings for the output
-	printf("%6s %-10s %-10s %-10s %-10s \n","UserID","Make","Model","AvgMPG","AvgPPG");
-	printf("   %-20s %-13s %-12s %-30s\n","Name","Phone","login","email");
+	printf("%6s \t%-10s %-11s %-7s %-7s \n","UserID","Make","Model","AvgMPG","AvgPPG");
+	printf("\t%-20s %-13s %-12s %-30s\n","Name","Phone","login","email");
 	
 		
 	// Read user data until reach EOF
 		while (fgets(szInptBuffer, 100, pFileUsers) != NULL)
 		{
-			
 			iScanfCnt = sscanf(szInptBuffer, "%10s %10s %lf %lf %d\n"
 				,user.szMake     
 				,user.szModel    
 				,&user.dAvgMPG        
 				,&user.dAvgPPG
-				,&user.iNumFillups);				
+				,&user.iNumFillups);
 			if (iScanfCnt < 5)
-				exitError("Bad data file Error","");
-			iScanfCnt = sscanf(szInptBuffer, "%6s,%30s%[^,],%13s,%12s\n"
-				,user.szUserId 
-				,user.szEmailAddr     
-				,user.szFullName    
-				,user.szPhone        
-				,user.szLoginName);				
-			if (iScanfCnt < 5)
-				exitError("Bad data file Error","");
-			printf("%6s %-10s %-10s %-10.2lf %-10.2lf\n"
-				,user.szUserId 
-				,user.szMake     
-				,user.szModel    
-				,user.dAvgMPG        
-				,user.dAvgPPG);
-			printf("%-20s %-13s %-12s %-30s\n"
-				,user.szFullName
-				,user.szPhone
-				,user.szLoginName    
-				,user.szEmailAddr);
-	//Counter to continu reading until EOF
-			iUserCnt++;
-			
-		}
+				exitError("Bad data file Error sscanf(1)","");
+			while (fgets(szInptBuffer, 100, pFileUsers) != NULL)
+			{
+				iScanfCnt = sscanf(szInptBuffer, "%6[^,],%30[^,],%20[^,],%13[^,],%12s\n"
+					,user.szUserId 
+					,user.szEmailAddr     
+					,user.szFullName    
+					,user.szPhone        
+					,user.szLoginName);
+				if (iScanfCnt < 5)
+					exitError("Bad data file Error sscanf(2)","");
+				printf("%6s \t%-10s %-11s %-7.2lf %-7.2lf\n"
+					,user.szUserId 
+					,user.szMake     
+					,user.szModel    
+					,user.dAvgMPG        
+					,user.dAvgPPG);
+				printf("\t%-20s %-13s %-12s %-30s\n"
+					,user.szFullName
+					,user.szPhone
+					,user.szLoginName    
+					,user.szEmailAddr);
+					break;
+					//Counter to continu reading until EOF
+				iUserCnt++;
+			}
+			}
  }
  /******************** processCommandSwitches *****************************
 void processCommandSwitches(int argc, char *argv[], char **ppszUserFileName)
