@@ -1,0 +1,37 @@
+//sort
+// switch/replace values in c
+
+int a = 3;
+int b = 4;
+int temp = a;
+a = b;
+b = temp;
+
+// for structures
+typedef User
+user a = {};
+user b = {};
+user temp = a;
+a = b;
+b = temp;
+
+
+
+int a = 3;
+int b = 4;
+
+swapInt (&a, &b)
+// function
+void swapInt(int *piA, int *piB)
+{
+	int iTemp = *piA;
+	*piA = *piB;
+	*piB = iTemp;
+	
+}
+
+
+
+
+http://www.eternallyconfuzzled.com/Tutorials.aspx
+http://www.cs.utsa.edu/~jsherett/CS2233-Spring2014/Overview.html
