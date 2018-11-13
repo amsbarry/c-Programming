@@ -1,0 +1,26 @@
+Node * insertLL(Node **ppHead, int iMatch)
+{
+Node *pNew;
+Node *pPrecedes;
+Node *pFind  = searcLL(*ppHead, iMatch, &pPrecedes);
+if(pFind) /*or (pFind != NULL)*/
+return pFind;
+pNew = allocateLL(iMatch);
+if(pPrecedes ==  Null)
+{
+pNew -> pnext = *pHead;
+
+*ppHead = pNew;
+}
+else
+{
+pNew -> pNext =pPrecedes -> pNext;
+pPrecedes -> pNext = pNew;
+}
+return pNew;
+}
+
+/*							pPrecedes
+pHead	->Node(10)->Node(20)->Node(30)->Node(40)->Node(Null)
+		(5)		(25)		  (45)
+		*/
